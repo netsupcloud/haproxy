@@ -1852,7 +1852,7 @@ static void h1_set_tunnel_mode(struct h1s *h1s)
  *
  * Returns 0 if no key found or invalid key
  */
-static int h1_search_et_key(struct h1s *h1s, struct h1m *h1m, struct htx *htx)
+static int h1_search_websocket_key(struct h1s *h1s, struct h1m *h1m, struct htx *htx)
 {
 	struct htx_blk *blk;
 	enum htx_blk_type type;
@@ -1873,8 +1873,8 @@ static int h1_search_et_key(struct h1s *h1s, struct h1m *h1m, struct htx *htx)
 		n = htx_get_blk_name(htx, blk);
 		v = htx_get_blk_value(htx, blk);
 
-		/* et key is base64 encoded of 16 bytes */
-		if (isteqi(n, ist("sec-et-key")) && v.len == 24 &&
+		/* Websocket key is base64 encoded of 16 bytes */
+		if (isteqi(n, ist("sec-Websocket-key")) && v.len == 24 &&
 		    !(h1m->flags & H1_MF_RESP)) {
 			/* Copy the key on request side
 			 * we might need it if the server is using h2 and does
