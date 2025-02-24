@@ -1900,7 +1900,7 @@ static int h1_search_websocket_key(struct h1s *h1s, struct h1m *h1m, struct htx 
 		}
 	}
 
-	/* If websocket-no-seckey is enabled, skip the missing key check */
+	/* If h1-websocket-skip-seckey is enabled, skip the missing key check */
 	if (h1s->px->h1-websocket-skip-seckey) {
 		return 1;
 	}
