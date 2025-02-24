@@ -1537,6 +1537,7 @@ The following keywords are supported in the "global" section :
    - gid
    - grace
    - group
+   - h1-websocket-skip-seckey
    - h1-accept-payload-with-any-method
    - h1-case-adjust
    - h1-case-adjust-file
