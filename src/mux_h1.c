@@ -1900,6 +1900,11 @@ static int h1_search_websocket_key(struct h1s *h1s, struct h1m *h1m, struct htx 
 		}
 	}
 
+	/* If websocket-no-seckey is enabled, skip the missing key check */
+	if (h1s->px->websocket_no_seckey) {
+		return 1;
+	}
+
 	/* missing websocket key, reject the message */
 	if (!ws_key_found) {
 		htx->flags |= HTX_FL_PARSING_ERROR;
